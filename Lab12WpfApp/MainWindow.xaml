@@ -1,0 +1,57 @@
+﻿<Window x:Class="Lab12WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab12WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="CheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Path Stroke="Gray" Grid.Row="0" StrokeThickness="3">
+                                <Path.Data>
+                                    <RectangleGeometry Rect="115,20,30,30" RadiusX="5" RadiusY="5"/>
+                                </Path.Data>
+                            </Path>
+                            <Path Stroke="Gray"  Grid.Row="0" Opacity="0" x:Name="line" StrokeThickness="3">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <LineGeometry StartPoint="115,20" EndPoint="145,50"/>
+                                        <LineGeometry StartPoint="145,20" EndPoint="115,50"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                            <Path Fill="Gray" Stroke="Gray" Grid.Row="0" Opacity="0" x:Name="ellipse">
+                                <Path.Data>
+                                    <EllipseGeometry Center="130,35" RadiusX="7" RadiusY="7"/>
+                                </Path.Data>
+                            </Path>
+                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" VerticalAlignment="Top"  HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="line" Property="Opacity" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter TargetName="ellipse" Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <UniformGrid Columns="3">
+        <CheckBox Content="Checked"/>
+        <CheckBox Content="UnChecked" IsChecked="True"/>
+        <CheckBox Content="Indeterminate" IsChecked="{x:Null}"></CheckBox>
+    </UniformGrid>
+</Window>
